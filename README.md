@@ -1,4 +1,4 @@
-# Sample Hardhat Project
+# Sample UserOperation Transaction
 
 1. npx hardhat run --network mumbai .\scripts\deploy_EntryPoint.js
 - update the addressesConfig file
