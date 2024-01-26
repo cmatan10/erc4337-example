@@ -7,7 +7,6 @@ const simpleAccountAddress = '0x76337bf48b17629B2760F2986Bd300d04d83A4f6';
 
 const exampleContractAddress = '0x3B5309068CF5B22E54C49EcFaDc756c72E91Df58';
 
-
 module.exports = {
     entryPointAddress,
     exampleContractAddress,
