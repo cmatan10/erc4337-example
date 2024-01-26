@@ -1,5 +1,5 @@
 const hre = require("hardhat");
-const { entryPointAddress } = require('./addresses');
+const { entryPointAddress } = require('../addressesConfig');
 
 async function main() {
 

@@ -18,7 +18,7 @@ module.exports = {
           chainId: 31337
       },
       mumbai: {
-          url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+          url: `${process.env.PROVIDER}`,
           accounts: [process.env.PRI_KEY],
           chainId: 80001,
       },    

@@ -1,11 +1,11 @@
 const hre = require("hardhat");
 
 
-const { eoaPublicKey } = require('./addresses');
-const { eoaPrivateKey } = require('./addresses');
-const { simpleAccountAddress } = require('./addresses');
-const { entryPointAddress } = require('./addresses');
-const { exampleContractAddress } = require('./addresses');
+const { eoaPublicKey } = require('../addressesConfig');
+const { eoaPrivateKey } = require('../addressesConfig');
+const { simpleAccountAddress } = require('../addressesConfig');
+const { entryPointAddress } = require('../addressesConfig');
+const { exampleContractAddress } = require('../addressesConfig');
 
 async function main() {
 
@@ -21,8 +21,8 @@ async function main() {
 
     const accountBalance = await entryPoint.deposits(simpleAccountAddress);
     console.log(`The balance of the simpleAccount is: ${accountBalance}`);
-
-    const funcTargetData = exampleContract.interface.encodeFunctionData('exec2')
+    
+    const funcTargetData = exampleContract.interface.encodeFunctionData('exec')
 
     const data = simpleAccount.interface.encodeFunctionData('execute', [exampleContractAddress, 0 ,funcTargetData])
 
@@ -46,7 +46,7 @@ async function main() {
     userOp.signature = await signer.signMessage(hre.ethers.getBytes(hash));
     try {    
         const tx = await entryPoint.handleOps([userOp], eoaPublicKey, {
-            gasLimit: 20000000
+            gasLimit: 2000000
         });
         const receipt = await tx.wait();
         console.log('Transaction successful:', receipt);

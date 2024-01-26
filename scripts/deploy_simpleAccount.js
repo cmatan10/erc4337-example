@@ -1,5 +1,5 @@
 const hre = require("hardhat");
-const { accountFactoryAddress } = require('./addresses');
+const { accountFactoryAddress } = require('../addressesConfig');
 const { createEOA } = require('./createEoaWallet');
 
 async function main() {

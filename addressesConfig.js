@@ -1,5 +1,5 @@
 const entryPointAddress = '';
-const accountFactoryAddress = "";
+const accountFactoryAddress = '';
 
 const eoaPublicKey = '';
 const eoaPrivateKey = '';
