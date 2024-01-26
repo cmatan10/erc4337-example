@@ -1,7 +1,6 @@
 const hre = require("hardhat");
+const { accountFactoryAddress } = require('./addresses');
 const { createEOA } = require('./createEoaWallet');
-
-const accountFactoryAddress = "0xe64fbbB8dC2E9893E7044A15B21D4DB87C2ff8c7";
 
 async function main() {
 
@@ -14,7 +13,7 @@ async function main() {
   // console.log('Transaction successful:', receipt);
 
   const getAccountAddress = await SimpleAccountFactory.createAccount.staticCall(EOA,0);
-  console.log('AccountAddress:', getAccountAddress);
+  console.log('simpleAccountAddress:', getAccountAddress);
 
 
 }

@@ -1,7 +1,5 @@
 const hre = require("hardhat");
-const { createEOA } = require('./createEoaWallet');
-
-const entryPointAddress = "0x0Fb809167a189791d0eD016889Ee6737f8F0bc29";
+const { entryPointAddress } = require('./addresses');
 
 async function main() {
 

@@ -1,11 +1,11 @@
 const hre = require("hardhat");
 
-const eoaPublicKey = '0x58Ad9D767A16FbA19160ED05E2b6e8bCb0d60911';
-const eoaPrivateKey = '0xd540e2f708479c932745c3c35f73f0b6fe0914e4cc90a4cbb45940579c402869';
-const simpleAccountAddress = '0x7866f21aBB23A17a7Be69A50D4ca1e7b8a90297B';
 
-const entryPointAddress = '0x0Fb809167a189791d0eD016889Ee6737f8F0bc29';
-const exampleContractAddress = '0x7Ff1658208548086046E1a5796E2944c8Ad29090';
+const { eoaPublicKey } = require('./addresses');
+const { eoaPrivateKey } = require('./addresses');
+const { simpleAccountAddress } = require('./addresses');
+const { entryPointAddress } = require('./addresses');
+const { exampleContractAddress } = require('./addresses');
 
 async function main() {
 

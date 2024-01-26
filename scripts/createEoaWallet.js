@@ -5,8 +5,8 @@ function createEOA() {
     const wallet = ethers.Wallet.createRandom();
 
     // Display the EOA details
-    console.log("Address: " + wallet.address);
-    console.log("Private Key: " + wallet.privateKey);
+    console.log("eoaPublicKey: " + wallet.address);
+    console.log("eoaPrivateKey: " + wallet.privateKey);
 
     // Return the private key
     return wallet.address;
