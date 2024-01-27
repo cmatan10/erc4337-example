@@ -1,11 +1,6 @@
 const hre = require("hardhat");
 
-
-const { eoaPublicKey } = require('../addressesConfig');
-const { eoaPrivateKey } = require('../addressesConfig');
-const { simpleAccountAddress } = require('../addressesConfig');
-const { entryPointAddress } = require('../addressesConfig');
-const { exampleContractAddress } = require('../addressesConfig');
+const { eoaPublicKey, eoaPrivateKey, simpleAccountAddress, entryPointAddress, exampleContractAddress } = require('../addressesConfig');
 
 async function main() {
 

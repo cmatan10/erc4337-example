@@ -1,9 +1,7 @@
 const hre = require("hardhat");
 require('dotenv').config();
 
-const { entryPointAddress } = require('../addressesConfig');
-const { simpleAccountAddress } = require('../addressesConfig');
-const { eoaPublicKey } = require('../addressesConfig');
+const { entryPointAddress, simpleAccountAddress, eoaPublicKey } = require('../addressesConfig');
 
 async function main() {
 
