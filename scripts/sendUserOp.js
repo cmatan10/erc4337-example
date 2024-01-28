@@ -17,7 +17,7 @@ async function main() {
     const accountBalance = await entryPoint.deposits(simpleAccountAddress);
     console.log(`The balance of the simpleAccount is: ${accountBalance}`);
     
-    const funcTargetData = exampleContract.interface.encodeFunctionData('exec')
+    const funcTargetData = exampleContract.interface.encodeFunctionData('safeMint')
 
     const data = simpleAccount.interface.encodeFunctionData('execute', [exampleContractAddress, 0 ,funcTargetData])
 
@@ -26,7 +26,7 @@ async function main() {
         nonce: await entryPoint.getNonce(simpleAccountAddress, 0),
         initCode: '0x',
         callData: data,
-        callGasLimit: '10000', 
+        callGasLimit: '100000', 
         verificationGasLimit: '100000', 
         preVerificationGas: '0x10edc8',
         maxFeePerGas: '0x0973e0',

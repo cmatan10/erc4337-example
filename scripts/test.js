@@ -1,14 +1,16 @@
 const hre = require("hardhat");
 
-const { exampleContractAddress } = require('../addressesConfig');
+const { exampleContractAddress, simpleAccountAddress } = require('../addressesConfig');
 
 async function main() {
 
     const exampleContract = await hre.ethers.getContractAt("exampleContract", exampleContractAddress);
 
-    const num = await exampleContract.num();
-    console.log(num);
+    const tokenId = await exampleContract.tokenId();
+    console.log(tokenId);
 
+    const balance = await exampleContract.balanceOf(simpleAccountAddress)
+    console.log(balance);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
