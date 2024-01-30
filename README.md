@@ -61,15 +61,7 @@ This script executes a user operation by interacting with the EntryPoint, Simple
 
 `npx hardhat run --network mumbai ./scripts/test.js`
 
-## Contracts
-- `EntryPoint`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/erc4337contracts.sol)
-- `SimpleAccountFactory`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/erc4337contracts.sol)
-- `SimpleAccount`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/erc4337contracts.sol)
-- `ExampleContract`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/exampleContract.sol)
-
 ## Configuration
 - `hardhat.config.js`: [View File](https://github.com/cmatan10/erc4337-example/blob/main/hardhat.config.js)
 - `addressesConfig.js`: [View File](https://github.com/cmatan10/erc4337-example/blob/main/addressesConfig.js)
-
-**Note:** The contents of this README are based on the current state of the [erc4337-example repository](https://github.com/cmatan10/erc4337-example) and the provided deployment and execution steps.
 
