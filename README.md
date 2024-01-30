@@ -1,19 +1,75 @@
-# Sample UserOperation Transaction
+# ERC4337 Example Project
 
-1. npx hardhat run --network mumbai .\scripts\deploy_EntryPoint.js
-- update the addressesConfig file
+## Overview
+This repository showcases a practical implementation of ERC4337, a standard for smart contract-based accounts, by demonstrating a complete workflow for minting an ERC721 token. The project involves setting up a smart contract environment on the Mumbai test network and executing user operations. Key components include:
+- **EntryPoint**: Manages user operations.
+- **AccountFactory**: Responsible for creating new accounts.
+- **SimpleAccount**: A basic account structure for users.
+- **ExampleContract**: A simple ERC721 token contract for minting tokens.
 
-2. npx hardhat run --network mumbai .\scripts\deploy_AccountFactory.js
-- update the addressesConfig file
+## Requisites
+- Clone the repository: git clone https://github.com/cmatan10/erc4337-example.
+- Install the dependence with the command `npm install`.
+- Ensure the `.env` file is updated based on the provided `.env.example`. It should include:
+  - A private key with sufficient Mumbai MATIC to deploy the contracts and fund the wallet for user operations.
+  - A Mumbai RPC URL for network connectivity.
+- Update  the `addressesConfig.js` file after each deployment step.
 
-3. npx hardhat run --network mumbai .\scripts\deploy_simpleAccount.js
-- update the addressesConfig file
+## Deployment and Execution Steps
+Follow these steps in order to deploy contracts and execute transactions:
 
-4. npx hardhat run --network mumbai .\scripts\deploy_ExampleContract.js
-- update the addressesConfig file
+### 1. Deploy the EntryPoint
+This script deploys the EntryPoint contract, which is central to managing user operations as per the ERC4337 standard. It awaits the deployment and logs the address where the EntryPoint is deployed.
 
-5. npx hardhat run --network mumbai .\scripts\depositFunds.js
+`npx hardhat run --network mumbai ./scripts/deploy_EntryPoint.js`
 
-6. npx hardhat run --network mumbai .\scripts\sendUserOp.js
+- Update the `entryPointAddress` in `addressesConfig.js`.
 
-7. npx hardhat run --network mumbai .\scripts\test.js 
+### 2. Deploy the AccountFactory
+This script deploys the AccountFactory contract. The AccountFactory is responsible for creating new smart contract-based accounts. It takes the address of the previously deployed EntryPoint as a parameter.
+
+`npx hardhat run --network mumbai ./scripts/deploy_AccountFactory.js`
+
+- Update the `accountFactoryAddress` in `addressesConfig.js`.
+
+### 3. Deploy SimpleAccount
+This script deploys the SimpleAccount contract using the AccountFactory. The SimpleAccount represents a basic account structure for users in the ERC4337 framework. Additionally, this script creates an Externally Owned Account (EOA) wallet. The EOA wallet is crucial as it represents the user's personal wallet in the network. This wallet is used to interact with the SimpleAccount, providing a layer of control and security for the user's operations.
+
+`npx hardhat run --network mumbai ./scripts/deploy_simpleAccount.js`
+
+- Update the `simpleAccountAddress` in `addressesConfig.js`.
+
+### 4. Deploy ExampleContract
+This script deploys the ExampleContract, a simple ERC721 token contract. This contract is used for minting tokens in this demonstration.
+
+`npx hardhat run --network mumbai ./scripts/deploy_ExampleContract.js`
+
+- Update the `exampleContractAddress` in `addressesConfig.js`.
+
+### 5. Deposit Funds
+This script is responsible for funding the necessary accounts to enable operations. It deposits funds into the EntryPoint contract for the SimpleAccount, ensuring that the smart contract-based account has enough balance for transaction fees and operations. Additionally, it also funds the EOA wallet that owns the SimpleAccount.
+
+`npx hardhat run --network mumbai ./scripts/depositFunds.js`
+
+### 6. Send User Operation
+This script executes a user operation by interacting with the EntryPoint, SimpleAccount, and ExampleContract. It prepares and sends a transaction, which typically involves a function call like safeMint from the ExampleContract, using the user's EOA wallet.
+
+`npx hardhat run --network mumbai ./scripts/sendUserOp.js`
+
+### 7. Test Script
+ This script checks the results of the previous operation. It queries the ExampleContract for the latest tokenId and the token balance of the SimpleAccount, verifying the success of the minting operation.
+
+`npx hardhat run --network mumbai ./scripts/test.js`
+
+## Contracts
+- `EntryPoint`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/erc4337contracts.sol)
+- `SimpleAccountFactory`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/erc4337contracts.sol)
+- `SimpleAccount`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/erc4337contracts.sol)
+- `ExampleContract`: [View Contract](https://github.com/cmatan10/erc4337-example/blob/main/contracts/exampleContract.sol)
+
+## Configuration
+- `hardhat.config.js`: [View File](https://github.com/cmatan10/erc4337-example/blob/main/hardhat.config.js)
+- `addressesConfig.js`: [View File](https://github.com/cmatan10/erc4337-example/blob/main/addressesConfig.js)
+
+**Note:** The contents of this README are based on the current state of the [erc4337-example repository](https://github.com/cmatan10/erc4337-example) and the provided deployment and execution steps.
+
