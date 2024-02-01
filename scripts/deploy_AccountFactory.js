@@ -3,12 +3,12 @@ const { entryPointAddress } = require('../addressesConfig');
 
 async function main() {
 
-  const SimpleAccountFactory = await hre.ethers.deployContract("SimpleAccountFactory",[entryPointAddress]);
+  const AccountFactory = await hre.ethers.deployContract("AccountFactory",[entryPointAddress]);
   
-  await SimpleAccountFactory.waitForDeployment();
+  await AccountFactory.waitForDeployment();
 
   console.log(
-    `AccountFactory deployed to ${SimpleAccountFactory.target}` 
+    `AccountFactory deployed to ${AccountFactory.target}` 
   );
 }
 

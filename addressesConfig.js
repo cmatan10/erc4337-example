@@ -1,6 +1,8 @@
 const entryPointAddress = '';
 const accountFactoryAddress = '';
 
+const paymasterAddress = '';
+
 const eoaPublicKey = '';
 const eoaPrivateKey = '';
 const simpleAccountAddress = '';
@@ -14,5 +16,6 @@ module.exports = {
     accountFactoryAddress,
     simpleAccountAddress,
     eoaPublicKey,
-    eoaPrivateKey
+    eoaPrivateKey,
+    paymasterAddress
   };

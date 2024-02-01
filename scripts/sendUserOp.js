@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 
-const { eoaPublicKey, eoaPrivateKey, simpleAccountAddress, entryPointAddress, exampleContractAddress } = require('../addressesConfig');
+const { eoaPublicKey, eoaPrivateKey, simpleAccountAddress, entryPointAddress, exampleContractAddress, paymasterAddress } = require('../addressesConfig');
 
 async function main() {
 
@@ -13,9 +13,6 @@ async function main() {
 
     const balanceWei = await hre.ethers.provider.getBalance(signer.address);
     console.log(`The balance of the signer is: ${balanceWei} Wei`);
-
-    const accountBalance = await entryPoint.deposits(simpleAccountAddress);
-    console.log(`The balance of the simpleAccount is: ${accountBalance}`);
     
     const funcTargetData = exampleContract.interface.encodeFunctionData('safeMint')
 
@@ -31,7 +28,7 @@ async function main() {
         preVerificationGas: '0x10edc8',
         maxFeePerGas: '0x0973e0',
         maxPriorityFeePerGas: '0x59682f10',
-        paymasterAndData: '0x', 
+        paymasterAndData: paymasterAddress, 
         signature: '0x'
     };
 
