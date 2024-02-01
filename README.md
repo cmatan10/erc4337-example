@@ -33,7 +33,7 @@ This script deploys the AccountFactory contract. The AccountFactory is responsib
 - Update the `accountFactoryAddress` in `addressesConfig.js`.
 
 ### 3. Deploy the Paymaster
-This script deploys the Paymaster contract, which covers transaction fees for wallets created from the specified AccountFactory. The EntryPoint address and the AccountFactory address is passed as a parameters to the Paymaster.
+This script deploys the Paymaster contract, which covers transaction fees for SimpleAccounts created from the specified AccountFactory. The EntryPoint address and the AccountFactory address is passed as a parameters to the Paymaster.
 
 `npx hardhat run --network mumbai ./scripts/deploy_Paymaster.js`
 
