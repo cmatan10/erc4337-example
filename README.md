@@ -60,7 +60,7 @@ This script is responsible for funding the necessary accounts to enable User Ope
 `npx hardhat run --network mumbai ./scripts/depositFunds.js`
 
 ### 7. Send User Operation
-This script executes a user operation by interacting with the EntryPoint, Paymaster, SimpleAccount, and ExampleContract. It prepares and sends a transaction, which typically involves a function call like safeMint from the ExampleContract, using the user's EOA wallet.
+This script executes a user operation by interacting with the EntryPoint, Paymaster, SimpleAccount, and ExampleContract. It prepares and sends a transaction, which typically involves a function call like safeMint from the ExampleContract, using the user's SimpleAccount.
 The transaction is sponsored by the Paymaster, which covers the transaction fees, using the funds deposited earlier.
 
 `npx hardhat run --network mumbai ./scripts/sendUserOp.js`
