@@ -4,6 +4,7 @@
 This repository showcases a practical implementation of ERC4337, a standard for smart contract-based accounts, by demonstrating a complete workflow for minting an ERC721 token. The project involves setting up a smart contract environment on the Mumbai test network and executing user operations. Key components include:
 - **EntryPoint**: Manages user operations.
 - **AccountFactory**: Responsible for creating new accounts.
+- **Paymaster**: Transactions sponsor for SimpleAccounts created from a specific AccountFactory address.
 - **SimpleAccount**: A basic account structure for users.
 - **ExampleContract**: A simple ERC721 token contract for minting tokens.
 
@@ -32,31 +33,39 @@ This script deploys the AccountFactory contract. The AccountFactory is responsib
 
 - Update the `accountFactoryAddress` in `addressesConfig.js`.
 
-### 3. Deploy SimpleAccount
+### 3. Deploy the Paymaster
+This script deploys the Paymaster contract, which covers transaction fees for wallets created from the specified AccountFactory. The EntryPoint address and the AccountFactory address is passed as a parameters to the Paymaster.
+
+`npx hardhat run --network mumbai ./scripts/deploy_Paymaster.js`
+
+- Update the `paymasterAddress` in `addressesConfig.js`.
+
+### 4. Deploy SimpleAccount
 This script deploys the SimpleAccount contract using the AccountFactory. The SimpleAccount represents a basic account structure for users in the ERC4337 framework. Additionally, this script creates an Externally Owned Account (EOA) wallet. The EOA wallet is crucial as it represents the user's personal wallet in the network. This wallet is used to interact with the SimpleAccount, providing a layer of control and security for the user's operations.
 
 `npx hardhat run --network mumbai ./scripts/deploy_simpleAccount.js`
 
 - Update the `simpleAccountAddress` in `addressesConfig.js`.
 
-### 4. Deploy ExampleContract
+### 5. Deploy ExampleContract
 This script deploys the ExampleContract, a simple ERC721 token contract. This contract is used for minting tokens in this demonstration.
 
 `npx hardhat run --network mumbai ./scripts/deploy_ExampleContract.js`
 
 - Update the `exampleContractAddress` in `addressesConfig.js`.
 
-### 5. Deposit Funds
-This script is responsible for funding the necessary accounts to enable operations. It deposits funds into the EntryPoint contract for the SimpleAccount, ensuring that the smart contract-based account has enough balance for transaction fees and operations. Additionally, it also funds the EOA wallet that owns the SimpleAccount.
+### 6. Deposit Funds
+This script is responsible for funding the necessary accounts to enable User Operations. It deposits funds into the EntryPoint contract for the Paymaster. This ensures that the Paymaster has sufficient balance to cover transaction fees for wallets created from the specified AccountFactory. Additionally, the script fund the EOA (Externally Owned Account) wallet that owns the SimpleAccount.
 
 `npx hardhat run --network mumbai ./scripts/depositFunds.js`
 
-### 6. Send User Operation
-This script executes a user operation by interacting with the EntryPoint, SimpleAccount, and ExampleContract. It prepares and sends a transaction, which typically involves a function call like safeMint from the ExampleContract, using the user's EOA wallet.
+### 7. Send User Operation
+This script executes a user operation by interacting with the EntryPoint, Paymaster, SimpleAccount, and ExampleContract. It prepares and sends a transaction, which typically involves a function call like safeMint from the ExampleContract, using the user's EOA wallet.
+The transaction is sponsored by the Paymaster, which covers the transaction fees, using the funds deposited earlier.
 
 `npx hardhat run --network mumbai ./scripts/sendUserOp.js`
 
-### 7. Test Script
+### 8. Test Script
  This script checks the results of the previous operation. It queries the ExampleContract for the latest tokenId and the token balance of the SimpleAccount, verifying the success of the minting operation.
 
 `npx hardhat run --network mumbai ./scripts/test.js`
