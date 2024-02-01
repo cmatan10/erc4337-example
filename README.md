@@ -9,7 +9,6 @@ This repository showcases a practical implementation of ERC4337, a standard for 
 - **ExampleContract**: A simple ERC721 token contract for minting tokens.
 
 ## Requisites
-- Clone the repository: git clone https://github.com/cmatan10/erc4337-example.
 - Install the dependence with the command `npm install`.
 - Ensure the `.env` file is updated based on the provided `.env.example`. It should include:
   - A private key with sufficient Mumbai MATIC to deploy the contracts and fund the wallet for user operations.
