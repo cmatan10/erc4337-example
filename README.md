@@ -13,7 +13,6 @@ This repository showcases a practical implementation of ERC4337, a standard for 
 - Ensure the `.env` file is updated based on the provided `.env.example`. It should include:
   - A private key with sufficient Mumbai MATIC to deploy the contracts and fund the wallet for user operations.
   - A Mumbai RPC URL for network connectivity.
-- Update  the `addressesConfig.js` file after each deployment step.
 
 ## Deployment and Execution Steps
 Follow these steps in order to deploy contracts and execute transactions:
@@ -23,35 +22,25 @@ This script deploys the EntryPoint contract, which is central to managing user o
 
 `npx hardhat run --network mumbai ./scripts/deploy_EntryPoint.js`
 
-- Update the `entryPointAddress` in `addressesConfig.js`.
-
 ### 2. Deploy the AccountFactory
 This script deploys the AccountFactory contract. The AccountFactory is responsible for creating new smart contract-based accounts. It takes the address of the previously deployed EntryPoint as a parameter.
 
 `npx hardhat run --network mumbai ./scripts/deploy_AccountFactory.js`
-
-- Update the `accountFactoryAddress` in `addressesConfig.js`.
 
 ### 3. Deploy the Paymaster
 This script deploys the Paymaster contract, which covers transaction fees for SimpleAccounts created from the specified AccountFactory. The EntryPoint address and the AccountFactory address is passed as a parameters to the Paymaster.
 
 `npx hardhat run --network mumbai ./scripts/deploy_Paymaster.js`
 
-- Update the `paymasterAddress` in `addressesConfig.js`.
-
 ### 4. Get Sender Address 
 This script creates an Externally Owned Account (EOA) wallet. The EOA wallet is critical because it signs the SimpleAccount transactions on the network and providing a layer of control and security for the user's operations. Additionally, this script determines the deployment address of the SimpleAccount contract, which embodies a fundamental account framework for users within the ERC4337 protocol.
 
 `npx hardhat run --network mumbai ./scripts/getSenderAddress.js`
 
-- Update the `eoaPublicKey` , `eoaPrivateKey` and `simpleAccountAddress` in `addressesConfig.js`.
-
 ### 5. Deploy ExampleContract
 This script deploys the ExampleContract, a simple ERC721 token contract. This contract is used for minting tokens in this demonstration.
 
 `npx hardhat run --network mumbai ./scripts/deploy_ExampleContract.js`
-
-- Update the `exampleContractAddress` in `addressesConfig.js`.
 
 ### 6. Deposit Funds
 This script is responsible for funding the necessary accounts to enable User Operations. It deposits funds into the EntryPoint contract for the Paymaster. This ensures that the Paymaster has sufficient balance to cover transaction fees for wallets created from the specified AccountFactory. Additionally, the script fund the EOA (Externally Owned Account) wallet that owns the SimpleAccount.
