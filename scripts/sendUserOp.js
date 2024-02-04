@@ -1,5 +1,5 @@
 const hre = require("hardhat");
-const { priorityFeePerGas } = require('./gasEstimator');
+const { priorityFeePerGas } = require('./helpers/gasEstimator');
 const { eoaPublicKey, 
         eoaPrivateKey, 
         simpleAccountAddress, 
