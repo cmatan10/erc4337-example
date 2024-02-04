@@ -1,5 +1,6 @@
 
 const hre = require("hardhat");
+const { updateAddressesConfig } = require('./helpers/updateAddressesConfig');
 
 async function main() {
 
@@ -10,6 +11,8 @@ async function main() {
   console.log(
     `EntryPoint deployed to ${entryPoint.target}`
   );
+
+  updateAddressesConfig('entryPointAddress', entryPoint.target);
 }
 
 main().catch((error) => {

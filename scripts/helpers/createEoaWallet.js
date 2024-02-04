@@ -9,7 +9,7 @@ function createEOA() {
     console.log("eoaPrivateKey: " + wallet.privateKey);
 
     // Return the private key
-    return wallet.address;
+    return [wallet.address , wallet.privateKey];
 }
 
 module.exports = { createEOA };

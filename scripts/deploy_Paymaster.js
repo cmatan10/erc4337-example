@@ -1,6 +1,7 @@
 
 const hre = require("hardhat");
 const { entryPointAddress, accountFactoryAddress } = require('../addressesConfig');
+const { updateAddressesConfig } = require('./helpers/updateAddressesConfig');
 
 async function main() {
 
@@ -11,6 +12,8 @@ async function main() {
   console.log(
     `Paymaster deployed to ${Paymaster.target}`
   );
+
+  updateAddressesConfig('paymasterAddress', Paymaster.target);
 }
 
 main().catch((error) => {
