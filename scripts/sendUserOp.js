@@ -6,7 +6,6 @@ async function main() {
     const wallet = new ethers.Wallet(eoaPrivateKey);
     const signer = wallet.connect(hre.ethers.provider);
 
-    
     const AccountFactory = await hre.ethers.getContractAt("AccountFactory", accountFactoryAddress, signer);
     const entryPoint = await hre.ethers.getContractAt("EntryPoint", entryPointAddress, signer);
     const simpleAccount = await hre.ethers.getContractAt("SimpleAccount", simpleAccountAddress, signer);
@@ -14,16 +13,16 @@ async function main() {
 
     const balanceWei = await hre.ethers.provider.getBalance(signer.address);
     console.log(`The balance of the signer is: ${balanceWei} Wei`);
-    
-    const funcTargetData = exampleContract.interface.encodeFunctionData('safeMint')
 
-    const data = simpleAccount.interface.encodeFunctionData('execute', [exampleContractAddress, 0 ,funcTargetData])
+    const funcTargetData = exampleContract.interface.encodeFunctionData('safeMint');
 
-    let initCode =  accountFactoryAddress + AccountFactory.interface.encodeFunctionData('createAccount', [eoaPublicKey, 0]).slice(2);
+    const data = simpleAccount.interface.encodeFunctionData('execute', [exampleContractAddress, 0, funcTargetData]);
 
-    const code = await hre.ethers.provider.getCode(simpleAccountAddress)
+    let initCode = accountFactoryAddress + AccountFactory.interface.encodeFunctionData('createAccount', [eoaPublicKey, 0]).slice(2);
 
-    if(code !== '0x'){
+    const code = await hre.ethers.provider.getCode(simpleAccountAddress);
+
+    if (code !== '0x') {
         initCode = '0x'
     }
 
@@ -32,20 +31,20 @@ async function main() {
         nonce: await entryPoint.getNonce(simpleAccountAddress, 0),
         initCode: initCode,
         callData: data,
-        callGasLimit: '100000', 
-        verificationGasLimit: '1000000', 
+        callGasLimit: '100000',
+        verificationGasLimit: '1000000',
         preVerificationGas: '0x10edc8',
         maxFeePerGas: '0x0973e0',
         maxPriorityFeePerGas: '0x59682f10',
-        paymasterAndData: paymasterAddress, 
+        paymasterAndData: paymasterAddress,
         signature: '0x'
     };
 
     const hash = await entryPoint.getUserOpHash(userOp);
-    console.log("hash",hash);
+    console.log("hash", hash);
 
     userOp.signature = await signer.signMessage(hre.ethers.getBytes(hash));
-    try {    
+    try {
         const tx = await entryPoint.handleOps([userOp], eoaPublicKey, {
             gasLimit: 2000000
         });
@@ -54,12 +53,11 @@ async function main() {
     } catch (error) {
         console.error('Error sending transaction:', error);
     }
-
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+    console.error(error);
+    process.exitCode = 1;
 });
