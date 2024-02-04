@@ -1,12 +1,13 @@
 const hre = require("hardhat");
-
-const { eoaPublicKey, eoaPrivateKey, simpleAccountAddress, entryPointAddress, exampleContractAddress, paymasterAddress } = require('../addressesConfig');
+const { eoaPublicKey, eoaPrivateKey, simpleAccountAddress, entryPointAddress, exampleContractAddress, accountFactoryAddress, paymasterAddress } = require('../addressesConfig');
 
 async function main() {
 
     const wallet = new ethers.Wallet(eoaPrivateKey);
     const signer = wallet.connect(hre.ethers.provider);
 
+    
+    const AccountFactory = await hre.ethers.getContractAt("AccountFactory", accountFactoryAddress, signer);
     const entryPoint = await hre.ethers.getContractAt("EntryPoint", entryPointAddress, signer);
     const simpleAccount = await hre.ethers.getContractAt("SimpleAccount", simpleAccountAddress, signer);
     const exampleContract = await hre.ethers.getContractAt("exampleContract", exampleContractAddress, signer);
@@ -18,13 +19,21 @@ async function main() {
 
     const data = simpleAccount.interface.encodeFunctionData('execute', [exampleContractAddress, 0 ,funcTargetData])
 
+    let initCode =  accountFactoryAddress + AccountFactory.interface.encodeFunctionData('createAccount', [eoaPublicKey, 0]).slice(2);
+
+    const code = await hre.ethers.provider.getCode(simpleAccountAddress)
+
+    if(code !== '0x'){
+        initCode = '0x'
+    }
+
     const userOp = {
         sender: simpleAccountAddress,
         nonce: await entryPoint.getNonce(simpleAccountAddress, 0),
-        initCode: '0x',
+        initCode: initCode,
         callData: data,
         callGasLimit: '100000', 
-        verificationGasLimit: '100000', 
+        verificationGasLimit: '1000000', 
         preVerificationGas: '0x10edc8',
         maxFeePerGas: '0x0973e0',
         maxPriorityFeePerGas: '0x59682f10',

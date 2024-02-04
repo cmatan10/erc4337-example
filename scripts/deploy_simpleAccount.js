@@ -1,5 +1,5 @@
 const hre = require("hardhat");
-const { accountFactoryAddress } = require('../addressesConfig');
+const { accountFactoryAddress, entryPointAddress } = require('../addressesConfig');
 const { createEOA } = require('./createEoaWallet');
 
 async function main() {
@@ -7,14 +7,18 @@ async function main() {
   const AccountFactory = await hre.ethers.getContractAt("AccountFactory", accountFactoryAddress);
 
   const EOA = createEOA()
-  
-  const createAccount = await AccountFactory.createAccount(EOA,0);
-  // const receipt = await createAccount.wait();
-  // console.log('Transaction successful:', receipt);
 
-  const getAccountAddress = await AccountFactory.createAccount.staticCall(EOA,0);
-  console.log('simpleAccountAddress:', getAccountAddress);
+  const entryPoint = await hre.ethers.getContractAt("EntryPoint", entryPointAddress);
 
+  const initCode = accountFactoryAddress + AccountFactory.interface.encodeFunctionData('createAccount', [EOA, 0]).slice(2);
+
+  let simpleAccountAddress
+  try {
+    await entryPoint.getSenderAddress(initCode)
+  } catch (transaction) {
+    simpleAccountAddress = '0x' + transaction.data.slice(-40);
+  }
+  console.log('simpleAccountAddress:', simpleAccountAddress);
 
 }
 
