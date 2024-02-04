@@ -1,5 +1,12 @@
 const hre = require("hardhat");
-const { eoaPublicKey, eoaPrivateKey, simpleAccountAddress, entryPointAddress, exampleContractAddress, accountFactoryAddress, paymasterAddress } = require('../addressesConfig');
+const { priorityFeePerGas } = require('./gasEstimator');
+const { eoaPublicKey, 
+        eoaPrivateKey, 
+        simpleAccountAddress, 
+        entryPointAddress, 
+        exampleContractAddress, 
+        accountFactoryAddress, 
+        paymasterAddress } = require('../addressesConfig');
 
 async function main() {
 
@@ -26,6 +33,8 @@ async function main() {
         initCode = '0x'
     }
 
+    console.log('maxPriorityFeePerGas:', await priorityFeePerGas());
+    
     const userOp = {
         sender: simpleAccountAddress,
         nonce: await entryPoint.getNonce(simpleAccountAddress, 0),
@@ -35,15 +44,15 @@ async function main() {
         verificationGasLimit: '1000000',
         preVerificationGas: '0x10edc8',
         maxFeePerGas: '0x0973e0',
-        maxPriorityFeePerGas: '0x59682f10',
+        maxPriorityFeePerGas: await priorityFeePerGas(),
         paymasterAndData: paymasterAddress,
         signature: '0x'
     };
 
     const hash = await entryPoint.getUserOpHash(userOp);
-    console.log("hash", hash);
 
     userOp.signature = await signer.signMessage(hre.ethers.getBytes(hash));
+
     try {
         const tx = await entryPoint.handleOps([userOp], eoaPublicKey, {
             gasLimit: 2000000

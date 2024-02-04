@@ -22,7 +22,8 @@
     "@openzeppelin/contracts": "^4.2.0",
     "dotenv": "^16.4.1",
     "ethers": "^6.10.0",
-    "hardhat": "^2.19.4"
+    "hardhat": "^2.19.4",
+    "web3": "^1.8.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0"
