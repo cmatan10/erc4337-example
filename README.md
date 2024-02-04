@@ -39,10 +39,10 @@ This script deploys the Paymaster contract, which covers transaction fees for Si
 
 - Update the `paymasterAddress` in `addressesConfig.js`.
 
-### 4. Deploy SimpleAccount
-This script creates an Externally Owned Account (EOA) wallet. The EOA wallet is critical because it signs the SimpleAccount transactions on the network and providing a layer of control and security for the user's operations. Additionally, this script deploys the SimpleAccount contract using the AccountFactory. The SimpleAccount represents a basic account structure for users in the ERC4337 framework. 
+### 4. get Sender Address 
+This script creates an Externally Owned Account (EOA) wallet. The EOA wallet is critical because it signs the SimpleAccount transactions on the network and providing a layer of control and security for the user's operations. Additionally, this script determines the deployment address of the SimpleAccount contract, which embodies a fundamental account framework for users within the ERC4337 protocol.
 
-`npx hardhat run --network mumbai ./scripts/deploy_simpleAccount.js`
+`npx hardhat run --network mumbai ./scripts/getSenderAddress.js`
 
 - Update the `simpleAccountAddress` in `addressesConfig.js`.
 
