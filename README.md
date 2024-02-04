@@ -44,7 +44,7 @@ This script creates an Externally Owned Account (EOA) wallet. The EOA wallet is 
 
 `npx hardhat run --network mumbai ./scripts/getSenderAddress.js`
 
-- Update the `simpleAccountAddress` in `addressesConfig.js`.
+- Update the `eoaPublicKey` , `eoaPrivateKey` and `simpleAccountAddress` in `addressesConfig.js`.
 
 ### 5. Deploy ExampleContract
 This script deploys the ExampleContract, a simple ERC721 token contract. This contract is used for minting tokens in this demonstration.
