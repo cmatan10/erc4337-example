@@ -15,4 +15,8 @@ contract exampleContract is ERC721 {
         tokenId++;
         _safeMint(msg.sender, tokenId);
     }
+    
+    function tokenURI(uint256) public view virtual override returns (string memory) {
+        return "ipfs://QmX5DoKzftys53UbZRh8RKzKMZnEtMTSUzwbKCbqSaW5yW/";
+    }
 }
