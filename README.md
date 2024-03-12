@@ -1,5 +1,7 @@
 # ERC4337 Example Project
 
+https://www.youtube.com/watch?v=f4A2uku2zHw&t=265s
+
 ## Overview
 This repository showcases a practical implementation of ERC4337, a standard for smart contract-based accounts, by demonstrating a complete workflow for minting an ERC721 token. The project involves setting up a smart contract environment on the Mumbai test network and executing user operations. Key components include:
 - **EntryPoint**: Manages user operations.
